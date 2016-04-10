@@ -14,24 +14,10 @@ router.get('/', (req: express.Request, res: express.Response, next: any) => {
         displayName: req.user ? req.user.displayName : '' });
 });
 
-/* GET product page. */
-router.get('/products', (req: express.Request, res: express.Response, next: any) => {
+/* GET user's tournaments page. */
+router.get('/tournaments', (req: express.Request, res: express.Response, next: any) => {
     res.render('index', { 
-        title: 'Products',
-        displayName: req.user ? req.user.displayName : ''});
-});
-
-/* GET services page. */
-router.get('/services', (req: express.Request, res: express.Response, next: any) => {
-    res.render('index', { 
-        title: 'Services',
-        displayName: req.user ? req.user.displayName : '' });
-});
-
-/* GET about page. */
-router.get('/about', (req: express.Request, res: express.Response, next: any) => {
-    res.render('index', { 
-        title: 'About',
+        title: 'Your Tournaments',
         displayName: req.user ? req.user.displayName : '' });
 });
 
@@ -81,13 +67,13 @@ router.get('/login', (req:express.Request, res: express.Response, next:any) => {
         });
         return;
     } else {
-        return res.redirect('/users');
+        return res.redirect('/');
     }
 });
 
 /* Process Login Request */
 router.post('/login', passport.authenticate('local', {
-    successRedirect: '/users',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 }));
@@ -120,7 +106,7 @@ router.post('/reset',(req:express.Request, res: express.Response, next:any) => {
                   }
                   
                   console.log('Password Changed');
-                  res.redirect('/users');
+                  res.redirect('/');
               });
           }
        }); 
@@ -163,7 +149,7 @@ router.post('/register', (req:express.Request, res: express.Response, next:any) 
            }
            // if registration is successful
            return passport.authenticate('local')(req, res, ()=>{
-              res.redirect('/users'); 
+              res.redirect('/'); 
            });
        });
 });
